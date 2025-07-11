@@ -11,46 +11,65 @@
     <div class="root">
         <h1>Music Player</h1>
         <main class="main">
-            <section class="player">
-                <img src="img/trec.png" alt="trec">
-                <div class="player__content">
-                    <div class="content-tp">
-                        <h2>How Much Is Weed?</h2>
+            <div class="content">
+                <div class="hendling">
+                    <div class="hendling-sound">
                         <img src="img/svg/volume.svg" alt="volume">
-                    </div>
-                    <div class="content-bt">
-                        <div class="regulator">
-                            <img src="img/svg/fast.svg" alt="fast">
-                            <img src="img/svg/play.svg" alt="play">
-                            <img src="img/svg/fast.svg" alt="fast">
+                        <div class="volume">
+                            <input 
+                                type="range" 
+                                name="volume" 
+                                class="controls"
+                                min="0"
+                                max="1"
+                                step="0.1"
+                                value="0.5"
+                            >
                         </div>
-                        <div class="regulator-bt"></div>
                     </div>
                 </div>
-            </section>
+                <div class="current">
+                    <div class="current-img" style="background-image: url(img/trec.png);"></div>
+                    <div class="current-info">
+                        <div class="current-info__top">
+                            <h2>Name</h2>
+                        </div>
+                        <div class="current-info__bt">
+                            <button>
+                                <img class="arrow-left" src="img/svg/fast.svg" alt="fast">
+                            </button>
+                            <button>
+                                <img src="img/svg/play.svg" alt="play">
+                            </button>
+                            <button>
+                                <img src="img/svg/fast.svg" alt="fast">
+                            </button>
+                        </div>
+                        <div class="current-info__progress"><span></span></div>
+                    </div>
+                </div>
 
-            <section class="catalog">
-                <div class="card">
-                    <img src="img/1.png" alt="trec">
-                    <p>name</p>
+                <div class="list">
+                    <div class="items">
+                        <div class="item">
+                            <div class="item-img" style="background-image: url(img/trec.png);"></div>
+                            <h3 class="item-track">Name</h3>
+                        </div>
+                        <div class="item">
+                            <div class="item-img" style="background-image: url(img/trec.png);"></div>
+                            <h3 class="item-track">Name</h3>
+                        </div>
+                        <div class="item">
+                            <div class="item-img" style="background-image: url(img/trec.png);"></div>
+                            <h3 class="item-track">Name</h3>
+                        </div>
+                        <div class="item">
+                            <div class="item-img" style="background-image: url(img/trec.png);"></div>
+                            <h3 class="item-track">Name</h3>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <img src="img/1.png" alt="trec">
-                    <p>name</p>
-                </div>
-                <div class="card">
-                    <img src="img/1.png" alt="trec">
-                    <p>namename</p>
-                </div>
-                <div class="card">
-                    <img src="img/1.png" alt="trec">
-                    <p>name name</p>
-                </div>
-                <div class="card">
-                    <img src="img/1.png" alt="trec">
-                    <p>name name name</p>
-                </div>
-            </section>
+            </div>
         </main>
     </div>
 </body>
