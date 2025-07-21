@@ -3,7 +3,8 @@ import { data } from "./data.js";
 const AudioController = {
     state: {
         aduios: [],
-        current: {}
+        current: {},
+        playing: false
     },
 
     init() {
@@ -21,6 +22,44 @@ const AudioController = {
         this.audioList.addEventListener('click', this.handleCl.bind(this))
     },
 
+    handleAudioPlay(){
+        const { playing, current } = this.state
+        const { audio } = current
+
+        !playing ? audio.play() : audio.pause();
+
+        this.state.playing = !playing
+    },
+
+    handleNext(){
+        const { current } = this.state
+        const {id} = current
+        const next = +id + 1
+        if(!next) return 
+
+        this.setCurrent(next)
+    },  
+
+    handlePrev(){
+        const { current } = this.state
+        const {id} = current
+        const prev = +id - 1
+        if(!prev) return 
+
+        this.setCurrent(prev)
+    },
+
+    handelPlayer(){
+        const play = document.querySelector('.play')
+        const next = document.querySelector('.play-right')
+        const prev = document.querySelector('.play-left')
+
+        play.addEventListener('click', this.handleAudioPlay.bind(this))
+        next.addEventListener('click', this.handleNext.bind(this))
+        prev.addEventListener('click', this.handlePrev.bind(this))
+
+    },
+
     renderCurrent(current){
         const {link, track} = current
         const [imges] = link.split('.')
@@ -31,20 +70,26 @@ const AudioController = {
                     <h2>${track}</h2>
                 </div>
                 <div class="current-info__bt">
-                    <button>
+                    <button class="play-left">
                         <img class="arrow-left" src="img/svg/fast.svg" alt="fast">
                     </button>
-                    <button>
+                    <button class="play">
                         <img src="img/svg/play.svg" alt="play">
                     </button>
-                    <button>
+                    <button class="play-right">
                         <img src="img/svg/fast.svg" alt="fast">
                     </button>
                 </div>
-            <div class="current-info__progress"><span></span></div>
         </div>
         `
         this.currentList.innerHTML = item
+        this.handelPlayer()
+    },
+
+    pauseAudio(){
+        const {current:{audio}} = this.state
+        if(!audio) return
+        audio.pause()
     },
 
     setCurrent(itemId){
@@ -52,6 +97,7 @@ const AudioController = {
         console.log(current);
         if(!current) return
 
+        this.pauseAudio()
         this.state.current = current
         this.renderCurrent(current)
     },
