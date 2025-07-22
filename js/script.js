@@ -4,7 +4,8 @@ const AudioController = {
     state: {
         aduios: [],
         current: {},
-        playing: false
+        playing: false,
+        volumes: 0.5
     },
 
     init() {
@@ -16,10 +17,20 @@ const AudioController = {
     initVariables() {
         this.audioList = document.querySelector('.items')
         this.currentList = document.querySelector('.current')
+        this.volume = document.querySelector('.controls')
     },
 
     initEvent() {
         this.audioList.addEventListener('click', this.handleCl.bind(this))
+        this.volume.addEventListener('change', this.handleVol.bind(this))
+    },
+
+    handleVol({target:{value}}){
+        const {current} = this.state
+        this.state.volumes = value
+        if(!current?.audio) return
+
+        current.audio.volume = value
     },
 
     handleAudioPlay(){
@@ -94,12 +105,13 @@ const AudioController = {
 
     setCurrent(itemId){
         const current = this.state.aduios.find(({id}) => +id === +itemId)
-        console.log(current);
         if(!current) return
 
         this.pauseAudio()
         this.state.current = current
+        current.audio.volume = this.state.volumes
         this.renderCurrent(current)
+        
     },
 
     handleCl({target}){
